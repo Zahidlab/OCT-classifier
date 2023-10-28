@@ -90,7 +90,7 @@ def stitch_patches(patches,):
     return Image.unsqueeze(dim=0)
 
 
-def stitcher(patches, shape = (512 , 960), step_cut = 4):
+def stitcher(patches, shape, patch_size, step_cut):
     if torch.is_tensor(patches):
       patches = patches.to('cpu')
     image = np.zeros(shape, dtype = np.float32)
@@ -105,7 +105,7 @@ def stitcher(patches, shape = (512 , 960), step_cut = 4):
     last_col = patches.shape[1]-1
     last_row = patches.shape[0]-1
 
-    s=64
+    s=patch_size
     row_start = 0
     row_end = 0
     col_start =0
